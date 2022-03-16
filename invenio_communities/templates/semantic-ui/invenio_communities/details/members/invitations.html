@@ -10,18 +10,19 @@
 {% extends "invenio_communities/details/members/base.html" %}
 
 {%- block javascript %}
-{{ super() }}
-{{ webpack['invenio-communities-invitations.js'] }}
+  {{ super() }}
+  {{ webpack['invenio-communities-invitations.js'] }}
 {%- endblock javascript %}
 
 {% set active_menu_item = 'invitations' %}
 
 {%- block settings_body %}
-<div class="thirteen wide column">
-  <div
-    id="app"
-    data-community='{{ community | tojson}}'>
+
+  <div class="thirteen wide column">
+    <div
+      data-invenio-search-config='{{ search_app_communities_invitations_config(app_id="communities-invitations-search", endpoint=endpoint) | tojson }}'>
+    </div>
   </div>
-  TODO
-</div>
+  
+
 {%- endblock settings_body %}

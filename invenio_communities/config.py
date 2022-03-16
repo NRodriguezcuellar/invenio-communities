@@ -99,3 +99,10 @@ COMMUNITIES_REQUESTS_SEARCH = {
     'sort': ['bestmatch', 'newest', 'oldest'],
 }
 """Community requests search configuration (i.e list of community requests)"""
+
+COMMUNITIES_INVITATIONS_SEARCH = {
+    'facets': ['type', 'status'],
+    'sort': ['bestmatch', 'newest', 'oldest'],
+}
+"""Community invitations search configuration (i.e list of community invitations)"""
+
