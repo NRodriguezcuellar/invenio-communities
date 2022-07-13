@@ -136,7 +136,7 @@ export const CommunitiesResults = ({
           </Grid.Column>
         </Grid.Row>
         <Grid.Row verticalAlign="middle">
-          <Grid.Column width={4}></Grid.Column>
+          <Grid.Column width={4} />
           <Grid.Column width={8} textAlign="center">
             <Pagination
               options={{

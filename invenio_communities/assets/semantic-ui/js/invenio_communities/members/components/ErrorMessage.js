@@ -20,9 +20,7 @@ export class ErrorMessage extends Component {
               return (
                 <Message.Item>
                   {/* when there is no field Marshmallow returns _schema */}
-                  {error.field !== "_schema" && (
-                    <strong>{error.field}: </strong>
-                  )}
+                  {error.field !== "_schema" && <strong>{error.field}: </strong>}
                   {error.messages.length === 1 ? (
                     error.messages[0]
                   ) : (

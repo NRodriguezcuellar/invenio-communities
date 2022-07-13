@@ -57,7 +57,7 @@ export const DeleteButton = (props) => {
         aria-expanded={modalOpen}
         id="delete-button"
       >
-        <Icon name="trash"></Icon>
+        <Icon name="trash" />
         {props.label}
       </Button>
 

@@ -26,4 +26,4 @@ for arg in $@; do
 done
 
 printf "${GREEN}Run eslint${NC}\n"
-npx eslint -c .eslintrc.yml invenio_app_rdm/**/*.js
+npx eslint -c .eslintrc.yml invenio_communities/**/*.js --fix

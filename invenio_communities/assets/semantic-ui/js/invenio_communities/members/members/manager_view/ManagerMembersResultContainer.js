@@ -10,11 +10,7 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 import { ManagerMemberBulkActions } from "./ManagerMemberBulkActions";
 
-export const ManagerMembersResultsContainer = ({
-  results,
-  community,
-  config,
-}) => {
+export const ManagerMembersResultsContainer = ({ results, community, config }) => {
   return (
     <Table>
       <Table.Header>
@@ -27,12 +23,8 @@ export const ManagerMembersResultsContainer = ({
               permissions={config.permissions}
             />
           </Table.HeaderCell>
-          <Table.HeaderCell width={2}>
-            {i18next.t("Member since")}
-          </Table.HeaderCell>
-          <Table.HeaderCell width={3}>
-            {i18next.t("Visibility")}
-          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>{i18next.t("Member since")}</Table.HeaderCell>
+          <Table.HeaderCell width={3}>{i18next.t("Visibility")}</Table.HeaderCell>
           <Table.HeaderCell width={4}>{i18next.t("Role")}</Table.HeaderCell>
           <Table.HeaderCell width={2} />
         </Table.Row>

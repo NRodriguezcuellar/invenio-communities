@@ -22,9 +22,7 @@ export const InvitationsResultsContainer = ({ results }) => {
           <Table.HeaderCell width={2} />
         </Table.Row>
       </Table.Header>
-      <Table.Body>
-        {results}
-      </Table.Body>
+      <Table.Body>{results}</Table.Body>
     </Table>
   );
 };

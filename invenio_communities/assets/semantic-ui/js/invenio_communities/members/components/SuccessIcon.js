@@ -35,9 +35,7 @@ export class SuccessIcon extends Component {
   render() {
     const { className } = this.props;
     const { show } = this.state;
-    return (
-      show && <Icon color="green" name="checkmark" className={className} />
-    );
+    return show && <Icon color="green" name="checkmark" className={className} />;
   }
 }
 

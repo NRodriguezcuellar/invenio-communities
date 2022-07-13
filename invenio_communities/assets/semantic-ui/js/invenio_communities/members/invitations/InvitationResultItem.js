@@ -51,17 +51,10 @@ export class InvitationResultItem extends Component {
           <Grid textAlign="left" verticalAlign="middle">
             <Grid.Column>
               <Item className="flex align-items-center" key={invitation.id}>
-                <Image
-                  src={member.avatar}
-                  avatar
-                  circular
-                  className="mr-10"
-                />
+                <Image src={member.avatar} avatar circular className="mr-10" />
                 <Item.Content>
                   <Item.Header size="small" as="b">
-                    <a
-                      href={`/communities/${community.slug}/requests/${request.id}`}
-                    >
+                    <a href={`/communities/${community.slug}/requests/${request.id}`}>
                       {member.name}
                     </a>
                   </Item.Header>

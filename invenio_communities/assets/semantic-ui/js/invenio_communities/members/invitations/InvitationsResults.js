@@ -11,10 +11,7 @@ import { Grid } from "semantic-ui-react";
 import { ResultsPerPage, Pagination, ResultsList } from "react-searchkit";
 import { i18next } from "@translations/invenio_communities/i18next";
 
-export const InvitationsResults = ({
-  paginationOptions,
-  currentResultsState,
-}) => {
+export const InvitationsResults = ({ paginationOptions, currentResultsState }) => {
   const { total } = currentResultsState.data;
   return (
     total && (

@@ -118,15 +118,11 @@ class ManagerMemberBulkActionsCmp extends Component {
     const actionToPerform = this.currentAction.action;
     const actionParameter = this.state[this.currentAction.actionParam];
 
-    const members = Object.entries(selectedMembers).map(
-      ([memberId, member]) => member
-    );
+    const members = Object.entries(selectedMembers).map(([memberId, member]) => member);
 
     this.setState({ loading: true });
 
-    this.cancellableAction = withCancel(
-      actionToPerform(members, actionParameter)
-    );
+    this.cancellableAction = withCancel(actionToPerform(members, actionParameter));
     try {
       await this.cancellableAction.promise;
 

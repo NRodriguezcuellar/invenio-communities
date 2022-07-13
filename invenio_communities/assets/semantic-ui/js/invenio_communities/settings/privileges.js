@@ -62,9 +62,7 @@ class CommunityPrivilegesForm extends Component {
       }
 
       if (errors) {
-        errors.forEach(({ field, messages }) =>
-          setFieldError(field, messages[0])
-        );
+        errors.forEach(({ field, messages }) => setFieldError(field, messages[0]));
       }
     }
 
@@ -81,11 +79,7 @@ class CommunityPrivilegesForm extends Component {
       >
         {({ isSubmitting, handleSubmit, values }) => (
           <Form onSubmit={handleSubmit}>
-            <Message
-              hidden={error === ""}
-              negative
-              className="flashed"
-            >
+            <Message hidden={error === ""} negative className="flashed">
               <Grid container>
                 <Grid.Column width={15} textAlign="left">
                   <strong>{error}</strong>
@@ -105,9 +99,7 @@ class CommunityPrivilegesForm extends Component {
                         fieldPath="access.visibility"
                         label={item.text}
                         labelIcon={item.icon}
-                        checked={
-                          _get(values, "access.visibility") === item.value
-                        }
+                        checked={_get(values, "access.visibility") === item.value}
                         value={item.value}
                         onChange={({ event, data, formikProps }) => {
                           formikProps.form.setFieldValue(

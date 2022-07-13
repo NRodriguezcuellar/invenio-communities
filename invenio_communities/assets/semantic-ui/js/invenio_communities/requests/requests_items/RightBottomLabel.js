@@ -17,20 +17,14 @@ export const RightBottomLabel = ({ result, className }) => {
       {result.receiver.community && result.expanded?.receiver.metadata.title && (
         <>
           <Icon className="default-margin" name="users" />
-          <span className="ml-5">
-            {result.expanded?.receiver.metadata.title}
-          </span>
+          <span className="ml-5">{result.expanded?.receiver.metadata.title}</span>
         </>
       )}
       {result.expires_at && (
-        <>
-          <span>
-            {i18next.t("Expires at:")}{" "}
-            {DateTime.fromISO(result.expires_at).toLocaleString(
-              i18next.language
-            )}
-          </span>
-        </>
+        <span>
+          {i18next.t("Expires at:")}{" "}
+          {DateTime.fromISO(result.expires_at).toLocaleString(i18next.language)}
+        </span>
       )}
     </small>
   );

@@ -69,9 +69,9 @@ export const RecordSearchBarElement = withState(
     return (
       <Input
         action={{
-          icon: "search",
-          onClick: onBtnSearchClick,
-          className: "search",
+          "icon": "search",
+          "onClick": onBtnSearchClick,
+          "className": "search",
           "aria-label": i18next.t("Search"),
         }}
         fluid
@@ -108,9 +108,7 @@ export const ParentFacetValue = ({
             icon="angle right"
             className="transparent"
             onClick={() => setIsActive(!isActive)}
-            aria-label={
-              i18next.t("Show all sub facets of ") + bucket.label || keyField
-            }
+            aria-label={i18next.t("Show all sub facets of ") + bucket.label || keyField}
           />
           <Checkbox
             label={bucket.label || keyField}
@@ -130,28 +128,21 @@ export const ParentFacetValue = ({
   );
 };
 
-export const FacetValue = ({
-  bucket,
-  keyField,
-  isSelected,
-  onFilterClicked,
-}) => {
+export const FacetValue = ({ bucket, keyField, isSelected, onFilterClicked }) => {
   return (
-    <>
-      <List.Content className="facet-wrapper">
-        <Checkbox
-          onClick={() => onFilterClicked(keyField)}
-          label={bucket.label || keyField}
-          id={`${keyField}-facet-checkbox`}
-          aria-describedby={`${keyField}-count`}
-          value={keyField}
-          checked={isSelected}
-        />
-        <Label circular id={`${keyField}-count`} className="facet-count">
-          {bucket.doc_count}
-        </Label>
-      </List.Content>
-    </>
+    <List.Content className="facet-wrapper">
+      <Checkbox
+        onClick={() => onFilterClicked(keyField)}
+        label={bucket.label || keyField}
+        id={`${keyField}-facet-checkbox`}
+        aria-describedby={`${keyField}-count`}
+        value={keyField}
+        checked={isSelected}
+      />
+      <Label circular id={`${keyField}-count`} className="facet-count">
+        {bucket.doc_count}
+      </Label>
+    </List.Content>
   );
 };
 
@@ -228,7 +219,7 @@ export const BucketAggregationElement = ({
 
 const SearchHelpLinks = () => {
   return (
-    <Overridable id={"Search.SearchHelpLinks"}>
+    <Overridable id="Search.SearchHelpLinks">
       <List>
         <List.Item>
           <a href="/help/search">{i18next.t("Search guide")}</a>
@@ -251,10 +242,7 @@ export const RequestsResults = ({
           <Grid.Column width={16}>
             <Segment>
               <Grid>
-                <Grid.Row
-                  verticalAlign="middle"
-                  className="small highlight-background"
-                >
+                <Grid.Row verticalAlign="middle" className="small highlight-background">
                   <Grid.Column width={4}>
                     <Count
                       label={() => (
@@ -321,9 +309,7 @@ export const RequestsResultsGridItemTemplate = ({ result, community }) => {
       <Card.Content>
         <Card.Header>{result.metadata.title}</Card.Header>
         <Card.Description>
-          <div
-            dangerouslySetInnerHTML={{ __html: result.metadata.description }}
-          />
+          <div dangerouslySetInnerHTML={{ __html: result.metadata.description }} />
         </Card.Description>
       </Card.Content>
     </Card>
@@ -336,20 +322,14 @@ const RightBottomLabel = ({ result, className }) => {
       {result.receiver.community && result.expanded?.receiver.metadata.title && (
         <>
           <Icon className="default-margin" name="users" />
-          <span className="ml-5">
-            {result.expanded?.receiver.metadata.title}
-          </span>
+          <span className="ml-5">{result.expanded?.receiver.metadata.title}</span>
         </>
       )}
       {result.expires_at && (
-        <>
-          <span>
-            {i18next.t("Expires at:")}{" "}
-            {DateTime.fromISO(result.expires_at).toLocaleString(
-              i18next.language
-            )}
-          </span>
-        </>
+        <span>
+          {i18next.t("Expires at:")}{" "}
+          {DateTime.fromISO(result.expires_at).toLocaleString(i18next.language)}
+        </span>
       )}
     </small>
   );
@@ -368,12 +348,9 @@ export const RequestsResultsItemTemplateCommunity = ({ result, community }) => {
       result.expanded?.created_by.username ||
       createdBy.user;
   } else if (isCreatorCommunity) {
-    creatorName =
-      result.expanded?.created_by.metadata?.title || createdBy.community;
+    creatorName = result.expanded?.created_by.metadata?.title || createdBy.community;
   }
-  const ComputerTabletRequestsItemsWithState = withState(
-    ComputerTabletRequestsItems
-  );
+  const ComputerTabletRequestsItemsWithState = withState(ComputerTabletRequestsItems);
   const MobileRequestsItemsWithState = withState(MobileRequestsItems);
   return (
     <>
@@ -407,9 +384,7 @@ class RequestStatusFilterComponent extends Component {
   componentDidMount() {
     const { currentQueryState } = this.props;
     const userSelectionFilters = currentQueryState.filters;
-    const openFilter = userSelectionFilters.find((obj) =>
-      obj.includes("is_open")
-    );
+    const openFilter = userSelectionFilters.find((obj) => obj.includes("is_open"));
     if (openFilter) {
       this.setState({
         open: openFilter.includes("true"),
@@ -422,8 +397,7 @@ class RequestStatusFilterComponent extends Component {
    * @param {string} OpenStatus true if open requests and false if closed requests
    */
   retrieveRequests = (OpenStatus) => {
-    const { currentQueryState, updateQueryState, keepFiltersOnUpdate } =
-      this.props;
+    const { currentQueryState, updateQueryState, keepFiltersOnUpdate } = this.props;
     const { open } = this.state;
 
     if (open === OpenStatus) {
@@ -561,9 +535,7 @@ export const RequestsEmptyResults = ({
   const is_open = userSelectionFilters.some(
     (obj) => obj.includes("is_open") && obj.includes("true")
   );
-  const filtersToNotReset = userSelectionFilters.find((obj) =>
-    obj.includes("is_open")
-  );
+  const filtersToNotReset = userSelectionFilters.find((obj) => obj.includes("is_open"));
   const elementsToReset = {
     queryString: "",
     page: 1,
@@ -572,14 +544,12 @@ export const RequestsEmptyResults = ({
 
   const AllDone = () => {
     return (
-      <>
-        <Header as="h1" icon>
-          {i18next.t("All done!")}
-          <Header.Subheader>
-            {i18next.t("You've caught up with all open requests.")}
-          </Header.Subheader>
-        </Header>
-      </>
+      <Header as="h1" icon>
+        {i18next.t("All done!")}
+        <Header.Subheader>
+          {i18next.t("You've caught up with all open requests.")}
+        </Header.Subheader>
+      </Header>
     );
   };
 
@@ -601,11 +571,9 @@ export const RequestsEmptyResults = ({
 
   const allRequestsDone = is_open && !queryString;
   return (
-    <>
-      <Segment placeholder textAlign="center">
-        {allRequestsDone ? <AllDone /> : <NoResults />}
-      </Segment>
-    </>
+    <Segment placeholder textAlign="center">
+      {allRequestsDone ? <AllDone /> : <NoResults />}
+    </Segment>
   );
 };
 

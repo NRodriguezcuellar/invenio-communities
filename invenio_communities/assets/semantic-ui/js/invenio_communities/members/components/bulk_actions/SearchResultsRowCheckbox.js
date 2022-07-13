@@ -47,15 +47,11 @@ export class SearchResultsRowCheckbox extends Component {
   render() {
     const { bulkActionContext, allSelected } = this.context;
     return (
-      <>
-        <Checkbox
-          className="mt-auto mb-auto "
-          checked={
-            this.isChecked(bulkActionContext, allSelected) || allSelected
-          }
-          onChange={this.handleOnChange}
-        />
-      </>
+      <Checkbox
+        className="mt-auto mb-auto "
+        checked={this.isChecked(bulkActionContext, allSelected) || allSelected}
+        onChange={this.handleOnChange}
+      />
     );
   }
 }
