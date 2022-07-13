@@ -22,4 +22,9 @@ export class InvitationsContextProvider extends Component {
 
 InvitationsContextProvider.propTypes = {
   community: PropTypes.object.isRequired,
+  children: PropTypes.node,
+};
+
+InvitationsContext.propTypes = {
+  children: undefined,
 };

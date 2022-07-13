@@ -18,12 +18,8 @@ export const MembersResultsContainer = ({ results }) => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell width={6}>{i18next.t("Members")}</Table.HeaderCell>
-          <Table.HeaderCell width={2}>
-            {i18next.t("Member since")}
-          </Table.HeaderCell>
-          <Table.HeaderCell width={2}>
-            {i18next.t("Visibility")}
-          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>{i18next.t("Member since")}</Table.HeaderCell>
+          <Table.HeaderCell width={2}>{i18next.t("Visibility")}</Table.HeaderCell>
           <Table.HeaderCell width={4}>{i18next.t("Role")}</Table.HeaderCell>
           <Table.HeaderCell width={2} />
         </Table.Row>

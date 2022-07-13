@@ -27,10 +27,7 @@ export const ComputerTabletRequestsItems = ({
     updateQueryState(currentQueryState);
   };
   return (
-    <Item
-      key={community.id}
-      className="community-item computer tablet only flex"
-    >
+    <Item key={community.id} className="community-item computer tablet only flex">
       <div className="status-icon mr-10">
         <Item.Content verticalAlign="top">
           <Item.Extra>
@@ -64,9 +61,7 @@ export const ComputerTabletRequestsItems = ({
             {i18next.t(`Opened {{difference}} by`, {
               difference: differenceInDays,
             })}{" "}
-            {isCreatorCommunity && (
-              <Icon className="default-margin" name="users" />
-            )}{" "}
+            {isCreatorCommunity && <Icon className="default-margin" name="users" />}{" "}
             {creatorName}
           </small>
           <RightBottomLabel className="right floated" result={result} />

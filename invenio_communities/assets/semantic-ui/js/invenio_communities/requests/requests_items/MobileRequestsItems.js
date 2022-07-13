@@ -50,9 +50,7 @@ export const MobileRequestsItems = ({
             {i18next.t(`Opened {{difference}} by`, {
               difference: differenceInDays,
             })}{" "}
-            {isCreatorCommunity && (
-              <Icon className="default-margin" name="users" />
-            )}{" "}
+            {isCreatorCommunity && <Icon className="default-margin" name="users" />}{" "}
             {creatorName}
           </small>
           <RightBottomLabel className="mb-5 block" result={result} />

@@ -6,7 +6,6 @@
  * under the terms of the MIT License; see LICENSE file for more details.
  */
 
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { i18next } from "@translations/invenio_communities/i18next";
@@ -42,10 +41,7 @@ export class SearchResultsBulkActions extends Component {
     this.setState({ action: value });
 
     const { selectedCount, bulkActionContext } = this.context;
-    const selected = _pickBy(
-      bulkActionContext,
-      ({ selected }) => selected === true
-    );
+    const selected = _pickBy(bulkActionContext, ({ selected }) => selected === true);
     optionSelectionCallback(value, selected, selectedCount);
     this.setState({ action: undefined });
   };

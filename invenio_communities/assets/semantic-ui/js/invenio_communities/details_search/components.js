@@ -13,12 +13,7 @@ import _get from "lodash/get";
 import _truncate from "lodash/truncate";
 import React, { useState } from "react";
 import Overridable from "react-overridable";
-import {
-  BucketAggregation,
-  SearchBar,
-  Toggle,
-  withState,
-} from "react-searchkit";
+import { BucketAggregation, SearchBar, Toggle, withState } from "react-searchkit";
 import {
   Accordion,
   Button,
@@ -59,11 +54,7 @@ export const CommunityRecordResultsListItem = ({ result }) => {
     "ui.publication_date_l10n_long",
     "No publication date found."
   );
-  const resource_type = _get(
-    result,
-    "ui.resource_type.title_l10n",
-    "No resource type"
-  );
+  const resource_type = _get(result, "ui.resource_type.title_l10n", "No resource type");
   const subjects = _get(result, "ui.subjects", []);
   const title = _get(result, "metadata.title", "No title");
   const version = _get(result, "ui.version", null);
@@ -81,9 +72,7 @@ export const CommunityRecordResultsListItem = ({ result }) => {
             {resource_type}
           </Label>
           <Label size="tiny" className={`access-status ${access_status_id}`}>
-            {access_status_icon && (
-              <i className={`icon ${access_status_icon}`} />
-            )}
+            {access_status_icon && <i className={`icon ${access_status_icon}`} />}
             {access_status}
           </Label>
         </Item.Extra>
@@ -150,9 +139,7 @@ export const CommunityRecordSearchAppLayout = ({ config }) => {
         </Grid.Column>
 
         <Grid.Column mobile={14} tablet={14} computer={12} floated="right">
-          <SearchBar
-            placeholder={i18next.t("Search records in community...")}
-          />
+          <SearchBar placeholder={i18next.t("Search records in community...")} />
         </Grid.Column>
 
         <Grid.Row>
@@ -190,9 +177,9 @@ export const CommunityRecordSearchBarElement = withState(
     return (
       <Input
         action={{
-          icon: "search",
-          onClick: onBtnSearchClick,
-          className: "search",
+          "icon": "search",
+          "onClick": onBtnSearchClick,
+          "className": "search",
           "aria-label": i18next.t("Search"),
         }}
         fluid
@@ -256,21 +243,19 @@ export const CommunityFacetValue = ({
   onFilterClicked,
 }) => {
   return (
-    <>
-      <List.Content className="facet-wrapper">
-        <Checkbox
-          onClick={() => onFilterClicked(keyField)}
-          label={bucket.label || keyField}
-          id={`${keyField}-facet-checkbox`}
-          aria-describedby={`${keyField}-count`}
-          value={keyField}
-          checked={isSelected}
-        />
-        <Label circular id={`${keyField}-count`} className="facet-count">
-          {bucket.doc_count}
-        </Label>
-      </List.Content>
-    </>
+    <List.Content className="facet-wrapper">
+      <Checkbox
+        onClick={() => onFilterClicked(keyField)}
+        label={bucket.label || keyField}
+        id={`${keyField}-facet-checkbox`}
+        aria-describedby={`${keyField}-count`}
+        value={keyField}
+        checked={isSelected}
+      />
+      <Label circular id={`${keyField}-count`} className="facet-count">
+        {bucket.doc_count}
+      </Label>
+    </List.Content>
   );
 };
 
@@ -306,7 +291,7 @@ export const CommunitiesFacetsValues = ({
 
 export const SearchHelpLinks = () => {
   return (
-    <Overridable id={"RdmSearch.SearchHelpLinks"}>
+    <Overridable id="RdmSearch.SearchHelpLinks">
       <List>
         <List.Item>
           <a href="/help/search">{i18next.t("Search guide")}</a>
@@ -362,7 +347,7 @@ export const CommunityBucketAggregationElement = ({
       <Card.Content>
         <Card.Header as="h2">
           {title}
-          { hasSelections() &&
+          {hasSelections() && (
             <Button
               basic
               icon
@@ -374,7 +359,7 @@ export const CommunityBucketAggregationElement = ({
             >
               {i18next.t("Clear")}
             </Button>
-          }
+          )}
         </Card.Header>
         {containerCmp}
       </Card.Content>
@@ -392,8 +377,7 @@ export const CommunityToggleComponent = ({
 }) => {
   const _isChecked = (userSelectionFilters) => {
     const isFilterActive =
-      userSelectionFilters.filter((filter) => filter[0] === filterValue[0])
-        .length > 0;
+      userSelectionFilters.filter((filter) => filter[0] === filterValue[0]).length > 0;
     return isFilterActive;
   };
 
@@ -454,15 +438,10 @@ export const CommunityEmptyResults = (props) => {
               {i18next.t("ProTip")}!
             </Header>
             <p>
-              <a
-                href={`${searchPath}?q=metadata.publication_date:[2017-01-01 TO *]`}
-              >
+              <a href={`${searchPath}?q=metadata.publication_date:[2017-01-01 TO *]`}>
                 metadata.publication_date:[2017-01-01 TO *]
               </a>{" "}
-              {i18next.t(
-                "will give you all the publications from 2017 until today"
-              )}
-              .
+              {i18next.t("will give you all the publications from 2017 until today")}.
             </p>
             <p>
               {i18next.t("For more tips, check out our ")}
@@ -505,11 +484,7 @@ export function SearchItemCreators({ creators }) {
             aria-label={`${creatorName}: ${i18next.t("ORCID profile")}`}
             title={`${creatorName}: ${i18next.t("ORCID profile")}`}
           >
-            <img
-              className="inline-id-icon"
-              src="/static/images/orcid.svg"
-              alt=""
-            />
+            <img className="inline-id-icon" src="/static/images/orcid.svg" alt="" />
           </a>
         );
         break;
@@ -520,11 +495,7 @@ export function SearchItemCreators({ creators }) {
             aria-label={`${creatorName}: ${i18next.t("ROR profile")}`}
             title={`${creatorName}: ${i18next.t("ROR profile")}`}
           >
-            <img
-              className="inline-id-icon"
-              src="/static/images/ror-icon.svg"
-              alt=""
-            />
+            <img className="inline-id-icon" src="/static/images/ror-icon.svg" alt="" />
           </a>
         );
         break;

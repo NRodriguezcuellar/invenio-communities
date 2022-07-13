@@ -12,21 +12,8 @@ import { Formik } from "formik";
 import _get from "lodash/get";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import {
-  FieldLabel,
-  RadioField,
-  TextField,
-  withCancel,
-} from "react-invenio-forms";
-import {
-  Button,
-  Divider,
-  Form,
-  Grid,
-  Header,
-  Icon,
-  Message,
-} from "semantic-ui-react";
+import { FieldLabel, RadioField, TextField, withCancel } from "react-invenio-forms";
+import { Button, Divider, Form, Grid, Header, Icon, Message } from "semantic-ui-react";
 import { CommunityApi } from "../api";
 import { communityErrorSerializer } from "../api/serializers";
 
@@ -47,18 +34,16 @@ const IdentifierField = ({ formConfig, slug = "" }) => {
     <TextField
       onChange={setNewSlug}
       label={
-        <FieldLabel
-          htmlFor="slug"
-          icon="barcode"
-          label={i18next.t("Identifier")}
-        />
+        <FieldLabel htmlFor="slug" icon="barcode" label={i18next.t("Identifier")} />
       }
       fieldPath="slug"
       helpText={helpText}
       fluid
       className="text-muted"
       // Prevent submitting before the value is updated:
-      onKeyDown={(e) => { e.key === "Enter" && e.preventDefault()}}
+      onKeyDown={(e) => {
+        e.key === "Enter" && e.preventDefault();
+      }}
     />
   );
 };
@@ -120,11 +105,7 @@ class CommunityCreateForm extends Component {
       >
         {({ values, isSubmitting, handleSubmit }) => (
           <Form onSubmit={handleSubmit} className="communities-creation">
-            <Message
-              hidden={error === ""}
-              negative
-              className="flashed"
-            >
+            <Message hidden={error === ""} negative className="flashed">
               <Grid container centered>
                 <Grid.Column mobile={16} tablet={12} computer={8} textAlign="left">
                   <strong>{error}</strong>
@@ -146,7 +127,9 @@ class CommunityCreateForm extends Component {
                     fluid
                     fieldPath="metadata.title"
                     // Prevent submitting before the value is updated:
-                    onKeyDown={(e) => { e.key === "Enter" && e.preventDefault()}}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     label={
                       <FieldLabel
                         htmlFor="metadata.title"
@@ -155,10 +138,7 @@ class CommunityCreateForm extends Component {
                       />
                     }
                   />
-                  <IdentifierField
-                    formConfig={formConfig}
-                    slug={values["slug"]}
-                  />
+                  <IdentifierField formConfig={formConfig} slug={values["slug"]} />
                   <Header as="h3">{i18next.t("Community visibility")}</Header>
                   {formConfig.access.visibility.map((item) => (
                     <React.Fragment key={item.value}>
@@ -167,9 +147,7 @@ class CommunityCreateForm extends Component {
                         fieldPath="access.visibility"
                         label={item.text}
                         labelIcon={item.icon}
-                        checked={
-                          _get(values, "access.visibility") === item.value
-                        }
+                        checked={_get(values, "access.visibility") === item.value}
                         value={item.value}
                         onChange={({ event, data, formikProps }) => {
                           formikProps.form.setFieldValue(

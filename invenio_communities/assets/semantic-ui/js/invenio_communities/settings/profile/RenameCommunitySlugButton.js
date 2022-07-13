@@ -43,9 +43,7 @@ export class RenameCommunitySlugButton extends Component {
     const newSlug = this.formInputRef.current.value;
     const client = new CommunityApi();
 
-    this.cancellableRename = withCancel(
-      client.renameSlug(community.id, newSlug)
-    );
+    this.cancellableRename = withCancel(client.renameSlug(community.id, newSlug));
     this.setState({ loading: true });
 
     try {
@@ -65,7 +63,6 @@ export class RenameCommunitySlugButton extends Component {
         this.setState({ error: invalidIdError });
       }
     }
-
   };
 
   render() {

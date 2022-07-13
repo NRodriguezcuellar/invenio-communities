@@ -6,9 +6,7 @@ import PropTypes from "prop-types";
 const DropdownContent = ({ title, description, selected }) => (
   <Grid>
     <Grid.Row>
-      <Grid.Column width={1}>
-        {selected && <Icon name="checkmark" />}
-      </Grid.Column>
+      <Grid.Column width={1}>{selected && <Icon name="checkmark" />}</Grid.Column>
       <Grid.Column width={14}>
         <Item.Group unstackable>
           <Item>
@@ -49,9 +47,7 @@ export const RoleDropdown = ({
 }) => {
   return (
     <ActionDropdown
-      optionsSerializer={(options) =>
-        rolesToDropdownOptions(options, currentValue)
-      }
+      optionsSerializer={(options) => rolesToDropdownOptions(options, currentValue)}
       options={roles}
       successCallback={successCallback}
       action={action}

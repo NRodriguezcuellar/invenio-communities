@@ -13,12 +13,8 @@ import { withState, Sort } from "react-searchkit";
 
 export class SearchFiltersComponent extends Component {
   render() {
-    const {
-      currentQueryState,
-      updateQueryState,
-      currentResultsState,
-      customFilters,
-    } = this.props;
+    const { currentQueryState, updateQueryState, currentResultsState, customFilters } =
+      this.props;
     const filters = customFilters
       ? customFilters
       : currentResultsState.data.aggregations;

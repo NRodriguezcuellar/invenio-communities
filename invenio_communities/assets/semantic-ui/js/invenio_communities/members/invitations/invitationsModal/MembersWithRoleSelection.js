@@ -84,9 +84,7 @@ export class MembersWithRoleSelection extends Component {
                 selectedMembers={selectedMembers}
                 handleChange={this.addMemberToSelected}
                 searchType="user"
-                placeholder={i18next.t(
-                  "Search by email, full name or username"
-                )}
+                placeholder={i18next.t("Search by email, full name or username")}
               />
             </Form.Field>
             <RadioSelection

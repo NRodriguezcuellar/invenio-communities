@@ -57,17 +57,17 @@ const RequestsResultsItemTemplateWithCommunity = parametrize(
 );
 const RequestAcceptButtonWithConfig = parametrize(RequestAcceptButton, {
   size: "mini",
-  className: "ml-5"
+  className: "ml-5",
 });
 
 const RequestDeclineButtonWithConfig = parametrize(RequestDeclineButton, {
   size: "mini",
-  className: "ml-5"
+  className: "ml-5",
 });
 
 const RequestCancelButtonWithConfig = parametrize(RequestCancelButton, {
   size: "mini",
-  className: "ml-5"
+  className: "ml-5",
 });
 
 const RequestAcceptButtonMobileWithConfig = parametrize(RequestAcceptButton, {
@@ -87,35 +87,35 @@ const RequestCancelButtonMobileWithConfig = parametrize(RequestCancelButton, {
 
 const CommunitySubmission = () => (
   <LabelTypeSubmission className="rel-mr-1" size="small" color="blue" />
-)
+);
 
 const CommunityInvitation = () => (
   <LabelTypeInvitation className="rel-mr-1" size="small" color="blue" />
-)
+);
 
 const Submitted = () => (
   <LabelStatusSubmit className="rel-mr-1" size="small" color="blue" />
-)
+);
 
 const Deleted = () => (
   <LabelStatusDelete className="rel-mr-1" size="small" color="red" />
-)
+);
 
 const Accepted = () => (
   <LabelStatusAccept className="rel-mr-1" size="small" color="green" />
-)
+);
 
 const Declined = () => (
   <LabelStatusDecline className="rel-mr-1" size="small" color="red" />
-)
+);
 
 const Cancelled = () => (
   <LabelStatusCancel className="rel-mr-1" size="small" color="grey" />
-)
+);
 
 const Expired = () => (
   <LabelStatusExpire className="rel-mr-1" size="small" color="grey" />
-)
+);
 
 const defaultComponents = {
   "BucketAggregation.element": BucketAggregationElement,

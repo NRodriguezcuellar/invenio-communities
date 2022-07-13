@@ -51,10 +51,7 @@ import { RenameCommunitySlugButton } from "./RenameCommunitySlugButton";
 
 const COMMUNITY_VALIDATION_SCHEMA = Yup.object({
   metadata: Yup.object({
-    title: Yup.string().max(
-      250,
-      i18next.t("Maximum number of characters is 2000")
-    ),
+    title: Yup.string().max(250, i18next.t("Maximum number of characters is 2000")),
     description: Yup.string().max(
       2000,
       i18next.t("Maximum number of characters is 2000")
@@ -147,7 +144,7 @@ const LogoUploader = ({ community, defaultLogo, hasLogo, onError, logoMaxSize })
             <Image
               src={community.links.logo}
               fallbackSrc={defaultLogo}
-              loadFallbackFirst={true}
+              loadFallbackFirst
               fluid
               wrapped
               rounded
@@ -169,7 +166,7 @@ const LogoUploader = ({ community, defaultLogo, hasLogo, onError, logoMaxSize })
             {i18next.t("Upload new picture")}
           </Button>
           <label className="helptext">
-            {i18next.t('File must be smaller than ')}
+            {i18next.t("File must be smaller than ")}
             {humanReadableBytes(logoMaxSize, true)}
           </label>
           {hasLogo && (
@@ -214,11 +211,7 @@ const DangerZone = ({ community, onError }) => (
         <Header as="h3" size="small">
           {i18next.t("Delete community")}
         </Header>
-        <p>
-          {i18next.t(
-            "Once deleted, it will be gone forever. Please be certain."
-          )}
-        </p>
+        <p>{i18next.t("Once deleted, it will be gone forever. Please be certain.")}</p>
       </Grid.Column>
       <Grid.Column mobile={16} tablet={6} computer={4} floated="right">
         <DeleteButton
@@ -226,9 +219,7 @@ const DangerZone = ({ community, onError }) => (
           label={i18next.t("Delete community")}
           redirectURL="/communities"
           confirmationMessage={
-            <h3>
-              {i18next.t("Are you sure you want to delete this community?")}
-            </h3>
+            <h3>{i18next.t("Are you sure you want to delete this community?")}</h3>
           }
           onDelete={async () => {
             const client = new CommunityApi();
@@ -248,7 +239,8 @@ class CommunityProfileForm extends Component {
   knownOrganizations = {};
 
   getInitialValues = () => {
-    let initialValues = _defaultsDeep(this.props.community, {
+    const { community } = this.props;
+    let initialValues = _defaultsDeep(community, {
       id: "",
       slug: "",
       metadata: {
@@ -390,9 +382,7 @@ class CommunityProfileForm extends Component {
 
       let serializedValue = {};
       if (fund !== null) {
-        serializedValue = Array.isArray(fund)
-          ? fund.map(_serialize)
-          : _serialize(fund);
+        serializedValue = Array.isArray(fund) ? fund.map(_serialize) : _serialize(fund);
       }
       return serializedValue;
     };
@@ -457,41 +447,34 @@ class CommunityProfileForm extends Component {
     }
   };
   render() {
-    const { types } = this.props;
+    const { types, community, hasLogo, defaultLogo, logoMaxSize } = this.props;
+    const { error } = this.state;
+
     return (
       <Formik
-        initialValues={this.getInitialValues(this.props.community)}
+        initialValues={this.getInitialValues(community)}
         validationSchema={COMMUNITY_VALIDATION_SCHEMA}
         onSubmit={this.onSubmit}
       >
         {({ isSubmitting, isValid, handleSubmit }) => (
           <Form onSubmit={handleSubmit} className="communities-profile">
-            <Message
-              hidden={this.state.error === ""}
-              negative
-              className="flashed"
-            >
+            <Message hidden={error === ""} negative className="flashed">
               <Grid container>
                 <Grid.Column width={15} textAlign="left">
-                  <strong>{this.state.error}</strong>
+                  <strong>{error}</strong>
                 </Grid.Column>
               </Grid>
             </Message>
             <Grid>
               <Grid.Row className="pt-10 pb-0">
-                <Grid.Column
-                  mobile={16}
-                  tablet={9}
-                  computer={9}
-                  className="rel-pb-2"
-                >
+                <Grid.Column mobile={16} tablet={9} computer={9} className="rel-pb-2">
                   <TextField
                     fluid
                     fieldPath="metadata.title"
                     label={
                       <FieldLabel
                         htmlFor="metadata.title"
-                        icon={"book"}
+                        icon="book"
                         label={i18next.t("Community name")}
                       />
                     }
@@ -530,33 +513,26 @@ class CommunityProfileForm extends Component {
                     label={
                       <FieldLabel
                         htmlFor="metadata.description"
-                        icon={"pencil"}
+                        icon="pencil"
                         label={i18next.t("Description")}
                       />
                     }
                   />
                   <RemoteSelectField
-                    fieldPath={"metadata.organizations"}
+                    fieldPath="metadata.organizations"
                     suggestionAPIUrl="/api/affiliations"
                     suggestionAPIHeaders={{
                       Accept: "application/json",
                     }}
-                    placeholder={i18next.t(
-                      "Search for an organization by name"
-                    )}
+                    placeholder={i18next.t("Search for an organization by name")}
                     clearable
                     multiple
-                    initialSuggestions={_get(
-                      this.props.community,
-                      "metadata.organizations",
-                      []
-                    )}
+                    initialSuggestions={_get(community, "metadata.organizations", [])}
                     serializeSuggestions={(organizations) =>
                       _map(organizations, (organization) => {
-                        const isKnownOrg =
-                          this.knownOrganizations.hasOwnProperty(
-                            organization.name
-                          );
+                        const isKnownOrg = this.knownOrganizations.hasOwnProperty(
+                          organization.name
+                        );
                         if (!isKnownOrg) {
                           this.knownOrganizations = {
                             ...this.knownOrganizations,
@@ -573,7 +549,7 @@ class CommunityProfileForm extends Component {
                     label={i18next.t("Organizations")}
                     noQueryMessage={i18next.t("Search for organizations...")}
                     allowAdditions
-                    search={(filteredOptions, searchQuery) => filteredOptions}
+                    search={(filteredOptions) => filteredOptions}
                   />
                   <FundingField
                     fieldPath="metadata.funding"
@@ -689,27 +665,19 @@ class CommunityProfileForm extends Component {
                     {i18next.t("Save")}
                   </Button>
                 </Grid.Column>
-                <Grid.Column
-                  mobile={16}
-                  tablet={6}
-                  computer={4}
-                  floated="right"
-                >
+                <Grid.Column mobile={16} tablet={6} computer={4} floated="right">
                   <LogoUploader
-                    community={this.props.community}
-                    hasLogo={this.props.hasLogo}
-                    defaultLogo={this.props.defaultLogo}
+                    community={community}
+                    hasLogo={hasLogo}
+                    defaultLogo={defaultLogo}
                     onError={this.setGlobalError}
-                    logoMaxSize={this.props.logoMaxSize}
+                    logoMaxSize={logoMaxSize}
                   />
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row className="danger-zone">
                 <Grid.Column width={16}>
-                  <DangerZone
-                    community={this.props.community}
-                    onError={this.setGlobalError}
-                  />
+                  <DangerZone community={community} onError={this.setGlobalError} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
