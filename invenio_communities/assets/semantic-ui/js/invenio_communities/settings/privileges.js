@@ -24,7 +24,8 @@ class CommunityPrivilegesForm extends Component {
     isSaved: false,
   };
   getInitialValues = () => {
-    let initialValues = _defaultsDeep(this.props.community, {
+    const { community } = this.props;
+    let initialValues = _defaultsDeep(community, {
       access: {
         visibility: "public",
         // TODO: Re-enable once properly integrated to be displayed
@@ -45,11 +46,12 @@ class CommunityPrivilegesForm extends Component {
   };
 
   onSubmit = async (values, { setSubmitting, setFieldError }) => {
+    const { community } = this.props;
     setSubmitting(true);
 
     try {
       const client = new CommunityApi();
-      await client.update(this.props.community.id, values);
+      await client.update(community.id, values, {});
 
       this.setIsSavedState(true);
     } catch (error) {
@@ -71,12 +73,9 @@ class CommunityPrivilegesForm extends Component {
 
   render() {
     const { isSaved, error } = this.state;
-    const { formConfig } = this.props;
+    const { formConfig, community } = this.props;
     return (
-      <Formik
-        initialValues={this.getInitialValues(this.props.community)}
-        onSubmit={this.onSubmit}
-      >
+      <Formik initialValues={this.getInitialValues(community)} onSubmit={this.onSubmit}>
         {({ isSubmitting, handleSubmit, values }) => (
           <Form onSubmit={handleSubmit}>
             <Message hidden={error === ""} negative className="flashed">
@@ -101,7 +100,7 @@ class CommunityPrivilegesForm extends Component {
                         labelIcon={item.icon}
                         checked={_get(values, "access.visibility") === item.value}
                         value={item.value}
-                        onChange={({ event, data, formikProps }) => {
+                        onChange={({ formikProps }) => {
                           formikProps.form.setFieldValue(
                             "access.visibility",
                             item.value

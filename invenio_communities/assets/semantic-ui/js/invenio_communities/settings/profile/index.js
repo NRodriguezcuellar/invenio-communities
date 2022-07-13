@@ -239,7 +239,8 @@ class CommunityProfileForm extends Component {
   knownOrganizations = {};
 
   getInitialValues = () => {
-    let initialValues = _defaultsDeep(this.props.community, {
+    const { community } = this.props;
+    let initialValues = _defaultsDeep(community, {
       id: "",
       slug: "",
       metadata: {
@@ -446,19 +447,21 @@ class CommunityProfileForm extends Component {
     }
   };
   render() {
-    const { types } = this.props;
+    const { types, community, hasLogo, defaultLogo, logoMaxSize } = this.props;
+    const { error } = this.state;
+
     return (
       <Formik
-        initialValues={this.getInitialValues(this.props.community)}
+        initialValues={this.getInitialValues(community)}
         validationSchema={COMMUNITY_VALIDATION_SCHEMA}
         onSubmit={this.onSubmit}
       >
         {({ isSubmitting, isValid, handleSubmit }) => (
           <Form onSubmit={handleSubmit} className="communities-profile">
-            <Message hidden={this.state.error === ""} negative className="flashed">
+            <Message hidden={error === ""} negative className="flashed">
               <Grid container>
                 <Grid.Column width={15} textAlign="left">
-                  <strong>{this.state.error}</strong>
+                  <strong>{error}</strong>
                 </Grid.Column>
               </Grid>
             </Message>
@@ -524,11 +527,7 @@ class CommunityProfileForm extends Component {
                     placeholder={i18next.t("Search for an organization by name")}
                     clearable
                     multiple
-                    initialSuggestions={_get(
-                      this.props.community,
-                      "metadata.organizations",
-                      []
-                    )}
+                    initialSuggestions={_get(community, "metadata.organizations", [])}
                     serializeSuggestions={(organizations) =>
                       _map(organizations, (organization) => {
                         const isKnownOrg = this.knownOrganizations.hasOwnProperty(
@@ -550,7 +549,7 @@ class CommunityProfileForm extends Component {
                     label={i18next.t("Organizations")}
                     noQueryMessage={i18next.t("Search for organizations...")}
                     allowAdditions
-                    search={(filteredOptions, searchQuery) => filteredOptions}
+                    search={(filteredOptions) => filteredOptions}
                   />
                   <FundingField
                     fieldPath="metadata.funding"
@@ -668,20 +667,17 @@ class CommunityProfileForm extends Component {
                 </Grid.Column>
                 <Grid.Column mobile={16} tablet={6} computer={4} floated="right">
                   <LogoUploader
-                    community={this.props.community}
-                    hasLogo={this.props.hasLogo}
-                    defaultLogo={this.props.defaultLogo}
+                    community={community}
+                    hasLogo={hasLogo}
+                    defaultLogo={defaultLogo}
                     onError={this.setGlobalError}
-                    logoMaxSize={this.props.logoMaxSize}
+                    logoMaxSize={logoMaxSize}
                   />
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row className="danger-zone">
                 <Grid.Column width={16}>
-                  <DangerZone
-                    community={this.props.community}
-                    onError={this.setGlobalError}
-                  />
+                  <DangerZone community={community} onError={this.setGlobalError} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
