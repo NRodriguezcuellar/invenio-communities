@@ -16,6 +16,7 @@ import { FieldLabel, RadioField, TextField, withCancel } from "react-invenio-for
 import { Button, Divider, Form, Grid, Header, Icon, Message } from "semantic-ui-react";
 import { CommunityApi } from "../api";
 import { communityErrorSerializer } from "../api/serializers";
+import PropTypes from "prop-types";
 
 const IdentifierField = ({ formConfig, slug = "" }) => {
   const [newSlug, setNewSlug] = React.useState(slug);
@@ -46,6 +47,15 @@ const IdentifierField = ({ formConfig, slug = "" }) => {
       }}
     />
   );
+};
+
+IdentifierField.propTypes = {
+  formConfig: PropTypes.object.isRequired,
+  slug: PropTypes.string,
+};
+
+IdentifierField.defaultProps = {
+  slug: "",
 };
 
 class CommunityCreateForm extends Component {
@@ -149,7 +159,7 @@ class CommunityCreateForm extends Component {
                         labelIcon={item.icon}
                         checked={_get(values, "access.visibility") === item.value}
                         value={item.value}
-                        onChange={({ event, data, formikProps }) => {
+                        onChange={({ formikProps }) => {
                           formikProps.form.setFieldValue(
                             "access.visibility",
                             item.value
@@ -183,6 +193,10 @@ class CommunityCreateForm extends Component {
     );
   }
 }
+
+CommunityCreateForm.propTypes = {
+  formConfig: PropTypes.object.isRequired,
+};
 
 const domContainer = document.getElementById("app");
 const formConfig = JSON.parse(domContainer.dataset.formConfig);

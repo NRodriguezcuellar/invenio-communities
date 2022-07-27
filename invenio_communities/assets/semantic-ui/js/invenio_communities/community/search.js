@@ -35,6 +35,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import { CommunitiesFacetsValues } from "../details_search/components";
+import PropTypes from "prop-types";
 
 function ResultsGridItemTemplate({ result }) {
   return (
@@ -53,6 +54,10 @@ function ResultsGridItemTemplate({ result }) {
     </Card>
   );
 }
+
+ResultsGridItemTemplate.propTypes = {
+  result: PropTypes.object.isRequired,
+};
 
 function ResultsItemTemplate({ result }) {
   return (
@@ -84,6 +89,10 @@ function ResultsItemTemplate({ result }) {
     </Item>
   );
 }
+
+ResultsItemTemplate.propTypes = {
+  result: PropTypes.object.isRequired,
+};
 
 export const CommunitiesResults = ({
   sortOptions,
@@ -162,6 +171,12 @@ export const CommunitiesResults = ({
   );
 };
 
+CommunitiesResults.propTypes = {
+  sortOptions: PropTypes.array.isRequired,
+  paginationOptions: PropTypes.object.isRequired,
+  currentResultsState: PropTypes.object.isRequired,
+};
+
 export const CommunitiesSearchBarElement = withState(
   ({
     placeholder: passedPlaceholder,
@@ -203,7 +218,7 @@ export const CommunitiesSearchBarElement = withState(
   }
 );
 
-const CommunitiesFacets = ({ aggs, currentResultsState }) => {
+const CommunitiesFacets = ({ aggs }) => {
   return (
     <>
       {aggs.map((agg) => {
@@ -217,6 +232,10 @@ const CommunitiesFacets = ({ aggs, currentResultsState }) => {
   );
 };
 
+CommunitiesFacets.propTypes = {
+  aggs: PropTypes.array.isRequired,
+};
+
 const RDMBucketAggregationElement = ({ title, containerCmp }) => {
   return (
     <Card className="borderless facet">
@@ -227,7 +246,13 @@ const RDMBucketAggregationElement = ({ title, containerCmp }) => {
     </Card>
   );
 };
-export const CommunitiesSearchLayout = (props) => {
+
+RDMBucketAggregationElement.propTypes = {
+  title: PropTypes.string.isRequired,
+  containerCmp: PropTypes.node.isRequired,
+};
+
+export const CommunitiesSearchLayout = ({ config }) => {
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   return (
@@ -273,15 +298,20 @@ export const CommunitiesSearchLayout = (props) => {
             width={4}
             open={sidebarVisible}
             onHideClick={() => setSidebarVisible(false)}
-            children={<SearchAppFacets aggs={props.config.aggs} />}
-          />
+          >
+            <SearchAppFacets aggs={config.aggs} />
+          </GridResponsiveSidebarColumn>
           <Grid.Column mobile={16} tablet={16} computer={12}>
-            <SearchAppResultsPane layoutOptions={props.config.layoutOptions} />
+            <SearchAppResultsPane layoutOptions={config.layoutOptions} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
     </Container>
   );
+};
+
+CommunitiesSearchLayout.propTypes = {
+  config: PropTypes.object.isRequired,
 };
 
 const defaultComponents = {
@@ -294,7 +324,7 @@ const defaultComponents = {
   "SearchBar.element": CommunitiesSearchBarElement,
   "SearchApp.results": CommunitiesResults,
 };
-const domContainer = document.getElementById("communities-search");
+//const domContainer = document.getElementById("communities-search");
 
 // Auto-initialize search app
 createSearchAppInit(defaultComponents);

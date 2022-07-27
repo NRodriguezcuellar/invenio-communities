@@ -25,6 +25,10 @@ InvitationsContextProvider.propTypes = {
   children: PropTypes.node,
 };
 
+InvitationsContextProvider.defaultProps = {
+  children: undefined,
+};
+
 InvitationsContext.propTypes = {
   children: undefined,
 };

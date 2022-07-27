@@ -23,4 +23,9 @@ export class MembersContextProvider extends Component {
 
 MembersContextProvider.propTypes = {
   community: PropTypes.object.isRequired,
+  children: PropTypes.node,
+};
+
+MembersContextProvider.defaultProps = {
+  children: undefined,
 };
