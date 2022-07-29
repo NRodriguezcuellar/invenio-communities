@@ -31,6 +31,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import { GridResponsiveSidebarColumn } from "react-invenio-forms";
+import PropTypes from "prop-types";
 
 export const CommunityRecordResultsListItem = ({ result }) => {
   const accessStatusId = _get(result, "ui.access_status.id", "open");
@@ -100,7 +101,9 @@ export const CommunityRecordResultsListItem = ({ result }) => {
   );
 };
 
-CommunityRecordResultsListItem.propTypes = {};
+CommunityRecordResultsListItem.propTypes = {
+  result: PropTypes.object.isRequired,
+};
 
 // TODO: Update this according to the full List item template?
 export const CommunityRecordResultsGridItem = ({ result }) => {
@@ -116,6 +119,10 @@ export const CommunityRecordResultsGridItem = ({ result }) => {
       </Card.Content>
     </Card>
   );
+};
+
+CommunityRecordResultsGridItem.propTypes = {
+  result: PropTypes.object.isRequired,
 };
 
 export const CommunityRecordSearchAppLayout = ({ config }) => {
@@ -152,6 +159,10 @@ export const CommunityRecordSearchAppLayout = ({ config }) => {
       </Grid>
     </Container>
   );
+};
+
+CommunityRecordSearchAppLayout.propTypes = {
+  config: PropTypes.object.isRequired,
 };
 
 export const CommunityRecordSearchBarElement = withState(
@@ -230,6 +241,14 @@ export const CommunityParentFacetValue = ({
       <Accordion.Content active={isActive}>{childAggCmps}</Accordion.Content>
     </Accordion>
   );
+};
+
+CommunityParentFacetValue.propTypes = {
+  bucket: PropTypes.object.isRequired,
+  keyField: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  childAggCmps: PropTypes.node,
+  onFilterCLicked: PropTypes.bool,
 };
 
 export const CommunityFacetValue = ({
